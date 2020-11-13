@@ -1,5 +1,45 @@
 # Week07 学习笔记 #
 
+## Trie树 ##
+
+#### 3个基本性质： ####
+
+1. 根节点不包含字符，除根节点外每一个节点都只包含一个字符； 
+2. 从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串； 
+3. 每个节点的所有子节点包含的字符都不相同。
+
+Trie的典型应用是用于统计，排序和保存大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：利用字符串的公共前缀来减少查询时间，最大限度地减少无谓的字符串比较，查询效率比哈希树高。
+
+#### Trie 树代码模板 ####
+    
+    # Python 
+    class Trie(object):
+      
+    	def __init__(self): 
+    		self.root = {} 
+    		self.end_of_word = "#" 
+     
+    	def insert(self, word): 
+    		node = self.root 
+    		for char in word: 
+    			node = node.setdefault(char, {}) 
+    		node[self.end_of_word] = self.end_of_word 
+     
+    	def search(self, word): 
+    		node = self.root 
+    		for char in word: 
+    			if char not in node: 
+    				return False 
+    			node = node[char] 
+    		return self.end_of_word in node 
+     
+    	def startsWith(self, prefix): 
+    		node = self.root 
+    		for char in prefix: 
+    			if char not in node: 
+    				return False 
+    			node = node[char] 
+    		return True
 
 ## 并查集 ##
 
